@@ -1,4 +1,3 @@
-import * as  _ from 'lodash';
 import { Sequelize, Model, DataTypes, BuildOptions } from 'sequelize';
 import { constants } from '../common/constant';
 

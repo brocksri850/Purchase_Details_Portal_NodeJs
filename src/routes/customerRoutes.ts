@@ -1,4 +1,4 @@
-import { query, Router } from "express";
+import { Router } from "express";
 import { routerResponse } from "../common/responseQuery"
 import signupService from "../services/signupService";
 
