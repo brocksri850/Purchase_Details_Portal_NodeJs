@@ -7,14 +7,14 @@ interface MyModel extends Model {
 }
 
 // Need to declare the static model so `findOne` etc. use correct types.
-export type AddToCartModelStatic = typeof Model & {
+export type OrderDetailModelStatic = typeof Model & {
     new(values?: object, options?: BuildOptions): MyModel;
 }
 
-export default function (sequelize: Sequelize): AddToCartModelStatic {
+export default function (sequelize: Sequelize): OrderDetailModelStatic {
 
-    let addToCart = <AddToCartModelStatic>sequelize.define("AddToCart", {
-        add_to_cart_id: {
+    let orderDetail = <OrderDetailModelStatic>sequelize.define("OrderDetail", {
+        order_detail_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
@@ -32,14 +32,11 @@ export default function (sequelize: Sequelize): AddToCartModelStatic {
         ordered_quantity: {
             type: DataTypes.DECIMAL
         },
-        amount: {
-            type: DataTypes.DECIMAL
-        },
         total_amount: {
             type: DataTypes.DECIMAL
         },
-        cancel_des: {
-            type: DataTypes.STRING
+        delivery_datetime: {
+            type: DataTypes.DATE
         },
         status: {
             type: DataTypes.STRING,
@@ -62,8 +59,8 @@ export default function (sequelize: Sequelize): AddToCartModelStatic {
         indexes: [],
         timestamps: false,
         freezeTableName: true,
-        tableName: 'add_to_cart'
+        tableName: 'order_details'
     });
 
-    return addToCart;
+    return orderDetail;
 }

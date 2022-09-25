@@ -22,21 +22,20 @@ export default function (sequelize: Sequelize): OrderModelStatic {
         customer_id: {
             type: DataTypes.INTEGER
         },
-        product_quantity: {
-            type: DataTypes.DECIMAL
+        quantity: {
+            type: DataTypes.INTEGER
         },
         total_amount: {
             type: DataTypes.DECIMAL
         },
-        order_address: {
+        delivery_address: {
             type: DataTypes.STRING
         },
-        cancel_description: {
+        description: {
             type: DataTypes.STRING
         },
-        order_uuid: {
-            type: DataTypes.UUID,
-            unique: true
+        delivery_datetime: {
+            type: DataTypes.DATE
         },
         status: {
             type: DataTypes.STRING,

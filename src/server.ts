@@ -9,7 +9,10 @@ import * as fileUpload from 'express-fileupload';
 import * as errorHandler from 'errorhandler';
 import * as methodOverride from 'method-override';
 
-// import userRoutes from './routes/userRoutes';
+import customerRoutes from './routes/customerRoutes';
+import orderRoutes from './routes/orderRoutes';
+import productRoutes from './routes/productRoutes';
+import orderDetailRoutes from './routes/orderDetailsRoutes';
 
 
 export class Server {
@@ -64,8 +67,10 @@ export class Server {
 
     //All Routes
 
-    // this.app.use('/user', userRoutes);
-
+    this.app.use('/customer', customerRoutes);
+    this.app.use('/order', orderRoutes);
+    this.app.use('/product', productRoutes);
+    this.app.use('/orderdetail', orderDetailRoutes);
 
     // Start Point
     this.app.use('/', function (req, res) {
@@ -75,5 +80,3 @@ export class Server {
   }
 
 }
-
-

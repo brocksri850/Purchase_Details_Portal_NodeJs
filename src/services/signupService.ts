@@ -3,8 +3,7 @@ import commonService from "./commonService";
 import * as async from "async";
 import * as crypto from "crypto";
 import { models } from "../models/model";
-import { cryptoCommon } from "../../utils/commonUtil";
-import { routerResponse } from "../common/responseQuery";
+import commonLogics from "../common/commonLogic";
 
 export interface EntityAttributes { }
 
@@ -15,7 +14,7 @@ export class SignupService {
 
         async.waterfall([
             function (waterfallCallback: Function) {
-                var isValidPassword = routerResponse.checkPassword(data.password)
+                var isValidPassword = commonLogics.checkPassword(data.password)
                 if (isValidPassword == false) {
                     return callback(null, constant.InValidPassword)
                 } else {
@@ -38,22 +37,15 @@ export class SignupService {
             function (Dummy: any, waterfallCallback: Function) {
 
                 data.salt = crypto.randomBytes(16).toString('hex');
-                data.password_string = crypto.pbkdf2Sync(data.password, data.salt, 1000, 64, `sha512`).toString(`hex`);
-                if (data.isActivationLinkRequired == true) {
-                    data.confirmation_code = cryptoCommon.encrypt(JSON.stringify({ email: data.email, user_name: data.user_name }));
-                    data.status = constant.Status.Pending;
-                } else {
-                    data.status = constant.Status.Accept
-                }
-
-                data.created_at = new Date().toISOString();
+                data.hash_password = crypto.pbkdf2Sync(data.password, data.salt, 1000, 64, `sha512`).toString(`hex`);
+                data.created_dt = new Date().toISOString();
 
                 commonService.findOrCreate({ email: data.email }, data, models.Customer, function (err: any, response: any) {
                     waterfallCallback(err, response);
                 })
             },
         ], function (err, result) {
-            callback(null, result);
+            callback(err, result);
         })
     }
 

@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "checkJs": true,
+        "declaration": true,
+        "moduleResolution": "node",
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true
+    },
+}

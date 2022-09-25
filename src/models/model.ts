@@ -10,7 +10,7 @@ import { logger } from "../common/logger";
 //models
 import customer, { CustomerModelStatic } from "./customer-model";
 import product, { ProductModelStatic } from "./product-model";
-import addToCart, { AddToCartModelStatic } from "./add_to_cart-model";
+import orderDetail, { OrderDetailModelStatic } from "./order_details-model";
 import order, { OrderModelStatic } from "./order-model";
 
 
@@ -19,7 +19,7 @@ export interface SequelizeModels {
 
   Customer: CustomerModelStatic;
   Product: ProductModelStatic;
-  AddToCart: AddToCartModelStatic;
+  OrderDetail: OrderDetailModelStatic;
   Order: OrderModelStatic;
 
 }
@@ -52,7 +52,7 @@ export class Database {
       sequelize,
       Customer: customer(this._sequelize),
       Product: product(this._sequelize),
-      AddToCart: addToCart(this._sequelize),
+      OrderDetail: orderDetail(this._sequelize),
       Order: order(this._sequelize),
     };
 
@@ -79,8 +79,7 @@ export class Database {
 
   initAssociations(models: SequelizeModels) {
 
-    // models.User.hasMany(models.EducationQualification, { foreignKey: "user_id", sourceKey: "user_id" });
-    // models.User.hasMany(models.WorkExperience, { foreignKey: "user_id", sourceKey: "user_id" });
+    models.OrderDetail.hasMany(models.Customer, { foreignKey: "customer_id", sourceKey: "customer_id" });
   }
 
   getSequelize() {
@@ -92,4 +91,3 @@ const database = new Database(databaseConfig.database);
 export const models = database.getModels();
 export const sequelize = database.getSequelize();
 export const associations = database.initAssociations(models);
-

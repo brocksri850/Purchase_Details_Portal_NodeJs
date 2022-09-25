@@ -34,6 +34,21 @@ export default function (sequelize: Sequelize): CustomerModelStatic {
             type: DataTypes.STRING,
             unique: true
         },
+        password: {
+            type: DataTypes.STRING
+        },
+        hash_password: {
+            type: DataTypes.STRING
+        },
+        salt: {
+            type: DataTypes.STRING
+        },
+        key: {
+            type: DataTypes.STRING
+        },
+        payload: {
+            type: DataTypes.JSON
+        },
         address: {
             type: DataTypes.STRING
         },

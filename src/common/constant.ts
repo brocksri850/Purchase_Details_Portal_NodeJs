@@ -1,4 +1,7 @@
 export class Constants {
+    DateTimeFormatServerSideUse(arg0: string, DateTimeFormatServerSideUse: any) {
+        throw new Error("Method not implemented.");
+    }
 
     Active = "Active"
     InActive = "InActive"
