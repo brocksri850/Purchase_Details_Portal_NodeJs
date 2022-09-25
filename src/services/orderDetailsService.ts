@@ -14,7 +14,6 @@ export class OrderDetailservice {
 
         var condition: any = {
             where: {
-                customer_id: session.customer_id,
                 status: "Active"
             },
             includes: [
@@ -23,7 +22,6 @@ export class OrderDetailservice {
             group: ['product_id'],
             attributes: ['customer_id', 'order_id', 'product_id', 'ordered_quantity', 'total_amount', 'delivery_datetime', 'status', 'created_dt', [Sequelize.literal(`COUNT(order_detail_id)`), 'product_count']]
         }
-
         condition.where.created_dt = { [Op.between]: [data.startCreatedDt, data.endCreatedDt] };
 
         if (req.query.sort == "Descending") {
@@ -31,6 +29,8 @@ export class OrderDetailservice {
         } else if (req.query.sort == "Ascending") {
             condition.order = [['delivery_datetime', 'ASC']]
         }
+
+        condition.where.customer_id = session.customer_id;
 
         if (req.query.search) {
             if (req.query.search) {
