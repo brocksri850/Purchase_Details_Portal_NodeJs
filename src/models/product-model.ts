@@ -33,7 +33,7 @@ export default function (sequelize: Sequelize): ProductModelStatic {
         price: {
             type: DataTypes.DECIMAL
         },
-        part_number_uniq: {
+        product_id_uniq: {
             type: DataTypes.STRING,
             unique: true
         },

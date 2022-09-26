@@ -48,7 +48,7 @@ export class ProductService {
                     columnToKey: {
                         B: 'product_name',
                         C: 'price',
-                        D: 'product_id',
+                        D: 'product_id_uniq',
                         E: 'description'
                     },
                     header: {
@@ -57,6 +57,27 @@ export class ProductService {
                     sheets: ['Sheet1']
                 });
                 waterfallCallback(null, FilePath, result.Sheet1);
+            },
+            function (FilePath: any, result: any, waterfallCallback: Function) {
+                var reqProductArray: any = [];
+                var productIds: any;
+
+                if (!_.isEmpty(result)) {
+                    result?.forEach((element: any) => {
+                        productIds = element.product_id_uniq;
+                        reqProductArray.push(productIds)
+                    })
+                }
+                var condition: any = {
+                    where: {
+                        product_id_uniq: reqProductArray
+                    }
+                }
+                commonService.findAll(condition, models.Product, function (err: Error, response: any) {
+                    if (err) return callback(err)
+                    if (!_.isEmpty(response)) return callback(null, "Oops..! please change sku number")
+                    if (_.isEmpty(response)) waterfallCallback(null, FilePath, result)
+                });
             },
             function (FilePath: any, result: any, waterfallCallback: Function) {
 
