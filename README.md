@@ -21,8 +21,8 @@ To start the server run:
 ## Kindly Refer the functionality
 
 *** Create a purchase details portal based on the customer ***
-`
-1. Create an API to upload the product information into the database. All products should be created via upload only.
+
+`1. Create an API to upload the product information into the database. All products should be created via upload only.
 
 2. If product info already exist in the database , should update it else insert the product
 
