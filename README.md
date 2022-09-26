@@ -22,7 +22,7 @@ To start the server run:
 
 ##  Create a purchase details portal based on the customer
 
-`1. Create an API to upload the product information into the database. All products should be created via upload only.
+1. Create an API to upload the product information into the database. All products should be created via upload only.
 
 2. If product info already exist in the database , should update it else insert the product
 
@@ -36,4 +36,4 @@ To start the server run:
 
 6. Api to list ordered product count based on date.
 
-7. Api to list customers based on the number of products purchased.`
+7. Api to list customers based on the number of products purchased.
