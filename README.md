@@ -20,7 +20,7 @@ To start the server run:
 
 ## Kindly Refer the functionality
 
-*** Create a purchase details portal based on the customer ***
+##  Create a purchase details portal based on the customer
 
 `1. Create an API to upload the product information into the database. All products should be created via upload only.
 
