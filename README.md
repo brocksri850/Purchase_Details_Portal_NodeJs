@@ -19,7 +19,8 @@ To start the server run:
 `$ npm start`
 
 
-## Postman Link : `https://documenter.getpostman.com/view/18002531/2s83S88rKN#9ed7c18c-fb6c-4fcf-962c-e2fd063000f3`
+## Postman Link
+`https://documenter.getpostman.com/view/18002531/2s83S88rKN#9ed7c18c-fb6c-4fcf-962c-e2fd063000f3`
 
 ## Kindly Refer the functionality
 
