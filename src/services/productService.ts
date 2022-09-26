@@ -33,7 +33,7 @@ export class ProductService {
                 requiredFile.mv(FilePath, function (err, data) {
                     if (err) {
                         var error = new Error("Something is wrong in folder Creation , please try again later")
-                        waterfallCallback(err, null)
+                        waterfallCallback(error, null)
                     } else {
                         waterfallCallback(null, FilePath);
                     }
