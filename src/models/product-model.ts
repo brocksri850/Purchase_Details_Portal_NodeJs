@@ -29,6 +29,7 @@ export default function (sequelize: Sequelize): ProductModelStatic {
         },
         quantity: {
             type: DataTypes.INTEGER,
+            defaultValue: 0
         },
         price: {
             type: DataTypes.DECIMAL

@@ -59,36 +59,33 @@ export class ProductService {
                 waterfallCallback(null, FilePath, result.Sheet1);
             },
             function (FilePath: any, result: any, waterfallCallback: Function) {
-                var reqProductArray: any = [];
-                var productIds: any;
-
-                if (!_.isEmpty(result)) {
-                    result?.forEach((element: any) => {
-                        productIds = element.product_id_uniq;
-                        reqProductArray.push(productIds)
-                    })
-                }
-                var condition: any = {
-                    where: {
-                        product_id_uniq: reqProductArray
-                    }
-                }
-                commonService.findAll(condition, models.Product, function (err: Error, response: any) {
-                    if (err) return callback(err)
-                    if (!_.isEmpty(response)) return callback(null, "Oops..! please change sku number")
-                    if (_.isEmpty(response)) waterfallCallback(null, FilePath, result)
-                });
-            },
-            function (FilePath: any, result: any, waterfallCallback: Function) {
 
                 //Remove File From server
                 fs.unlinkSync(normalize(path.resolve(__dirname + "/../../../" + FilePath)));
 
                 async.waterfall([
                     function (waterfallCallback: Function) {
+                        commonService.findAll({ where: { customer_id: session.customer_id } }, models.Product, function (err: any, Product: any) {
+                            waterfallCallback(err, Product)
+                        })
+                    },
+                    function (Product: any, waterfallCallback: Function) {
+
+                        Product.forEach((element1: any) => {
+                            result.forEach((element: any, index: any) => {
+                                if (element.product_id_uniq && element1.product_id_uniq && (element.product_id_uniq == element1.product_id_uniq)) {
+                                    result.splice(index, 1)
+                                }
+                                if ((element.product_name?.toLowerCase() == element1.product_name?.toLowerCase())) {
+                                    result.splice(index, 1)
+                                }
+                            })
+                        });
 
                         result.forEach((value) => {
                             value.customer_id = session.customer_id;
+                            value.created_by = session.customer_id;
+                            value.created_dt = new Date().toISOString();
                         })
 
                         commonService.bulkCreate(result, models.Product, function (err: any, response: any) {
