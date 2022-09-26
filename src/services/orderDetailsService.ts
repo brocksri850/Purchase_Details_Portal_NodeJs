@@ -30,7 +30,7 @@ export class OrderDetailservice {
             condition.order = [['delivery_datetime', 'ASC']]
         }
 
-        condition.where.customer_id = session.customer_id;
+        condition.where.customer_id = data.customer_id ? data.customer_id : null;
 
         if (req.query.search) {
             if (req.query.search) {
